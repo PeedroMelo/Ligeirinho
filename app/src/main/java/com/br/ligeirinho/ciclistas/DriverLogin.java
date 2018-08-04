@@ -37,7 +37,7 @@ public class DriverLogin extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        getSupportActionBar().setTitle("Login | Ciclsita");
+        getSupportActionBar().setTitle("Login Ciclsita");
 
         // Firebase Auth
         dAuth = FirebaseAuth.getInstance(); // Recupera a instancia do Firebase e seta na dAuth
@@ -76,40 +76,11 @@ public class DriverLogin extends AppCompatActivity {
         dSignin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(DriverLogin.this, CriarConta.class);
-                intent.putExtra("tipo", "ciclista");
+                Intent intent = new Intent(DriverLogin.this, DriverCriarConta.class);
                 startActivity(intent);
                 finishAffinity();
             }
         });
-
-        // Registra ciclista
-//        dSignin.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                final String email = dEmail.getText().toString();
-//                final String password = dPassword.getText().toString();
-//
-//                if (email == null || password == null){
-//                    Toast.makeText(DriverLogin.this, "Campos Obrigatórios!", Toast.LENGTH_LONG).show();
-//                    return;
-//                }
-//
-//                dAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(DriverLogin.this, new OnCompleteListener<AuthResult>() {
-//                    @Override
-//                    public void onComplete(@NonNull Task<AuthResult> task) {
-//                        if(!task.isSuccessful()){
-//                            Toast.makeText(DriverLogin.this, "Ocorreu um erro na criação de usuário", Toast.LENGTH_LONG).show();
-//                        }else{
-//                            String user_id = dAuth.getCurrentUser().getUid();
-//                            DatabaseReference current_user_db = FirebaseDatabase.getInstance().getReference().child("Users").child("Drivers").child(user_id);
-//                            current_user_db.setValue(true);
-//                        }
-//                    }
-//                });
-//            }
-//        });
 
 
         dLogin.setOnClickListener(new View.OnClickListener() {

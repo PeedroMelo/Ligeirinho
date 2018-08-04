@@ -37,7 +37,7 @@ public class CustomerLogin extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        getSupportActionBar().setTitle("Login | Cliente");
+        getSupportActionBar().setTitle("Login Cliente");
 
         // Firebase Auth
         cAuth = FirebaseAuth.getInstance(); // Recupera a instancia do Firebase e seta na cAuth
@@ -75,42 +75,11 @@ public class CustomerLogin extends AppCompatActivity {
         cSignin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(CustomerLogin.this, CriarConta.class);
-                intent.putExtra("tipo", "cliente");
+                Intent intent = new Intent(CustomerLogin.this, CustomerCriarConta.class);
                 startActivity(intent);
                 finishAffinity();
             }
         });
-
-        // Registra ciclista
-//        cSignin.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                if (cEmail == null || cPassword == null){
-//                    Toast.makeText(CustomerLogin.this, "Campos Obrigatórios!", Toast.LENGTH_LONG).show();
-//                    return;
-//                }
-//
-//                final String email = cEmail.getText().toString();
-//                final String password = cPassword.getText().toString();
-//
-//
-//                cAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(CustomerLogin.this, new OnCompleteListener<AuthResult>() {
-//                    @Override
-//                    public void onComplete(@NonNull Task<AuthResult> task) {
-//                        if(!task.isSuccessful()){
-//                            Toast.makeText(CustomerLogin.this, "Ocorreu um erro na criação de usuário", Toast.LENGTH_LONG).show();
-//                        }else{
-//                            String user_id = cAuth.getCurrentUser().getUid();
-//                            DatabaseReference current_user_db = FirebaseDatabase.getInstance().getReference().child("Users").child("Customers").child(user_id);
-//                            current_user_db.setValue(true);
-//                        }
-//                    }
-//                });
-//            }
-//        });
-
 
         cLogin.setOnClickListener(new View.OnClickListener() {
             @Override

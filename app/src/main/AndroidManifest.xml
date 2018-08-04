@@ -61,7 +61,9 @@
         <activity android:name=".clientes.CustomerDetalhesPedido" />
         <activity android:name=".ciclistas.DriverVisualizarPedido" />
         <activity android:name=".ciclistas.DriverFinalizarPedido" />
-        <activity android:name=".clientes.CustomersPedidosFinalizados"></activity>
+        <activity android:name=".clientes.CustomersPedidosFinalizados" />
+        <activity android:name=".ciclistas.DriverCriarConta" />
+        <activity android:name=".clientes.CustomerCriarConta"></activity>
     </application>
 
 </manifest>

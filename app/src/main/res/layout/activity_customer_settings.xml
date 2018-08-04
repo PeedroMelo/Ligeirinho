@@ -25,6 +25,7 @@
                 >
 
                 <ImageButton
+                    android:id="@+id/imagemPerfil"
                     android:layout_width="110dp"
                     android:layout_height="110dp"
                     android:layout_marginLeft="20dp"
@@ -132,58 +133,58 @@
 
 
     <!-- Email -->
-    <LinearLayout
-        android:id="@+id/changeEmail"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+    <!--<LinearLayout-->
+        <!--android:id="@+id/changeEmail"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:orientation="vertical">-->
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="15dp"
-            android:textSize="15dp"
-            android:text="Email"/>
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_marginLeft="15dp"-->
+            <!--android:textSize="15dp"-->
+            <!--android:text="Email"/>-->
 
-        <TextView
-            android:id="@+id/fieldEmail"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="15dp"
-            android:layout_marginBottom="20dp"
-            android:textSize="20dp"
-            android:textColor="#000"
-            android:text="email"
-            />
+        <!--<TextView-->
+            <!--android:id="@+id/fieldEmail"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_marginLeft="15dp"-->
+            <!--android:layout_marginBottom="20dp"-->
+            <!--android:textSize="20dp"-->
+            <!--android:textColor="#000"-->
+            <!--android:text="email"-->
+            <!--/>-->
 
-    </LinearLayout>
+    <!--</LinearLayout>-->
 
 
     <!-- Senha -->
-    <LinearLayout
-        android:id="@+id/changeSenha"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+    <!--<LinearLayout-->
+        <!--android:id="@+id/changeSenha"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:orientation="vertical">-->
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="15dp"
-            android:textSize="15dp"
-            android:text="Senha"/>
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_marginLeft="15dp"-->
+            <!--android:textSize="15dp"-->
+            <!--android:text="Senha"/>-->
 
-        <TextView
-            android:id="@+id/fieldSenha"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="15dp"
-            android:layout_marginBottom="20dp"
-            android:textSize="20dp"
-            android:textColor="#000"
-            android:text="****"
-            />
-    </LinearLayout>
+        <!--<TextView-->
+            <!--android:id="@+id/fieldSenha"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_marginLeft="15dp"-->
+            <!--android:layout_marginBottom="20dp"-->
+            <!--android:textSize="20dp"-->
+            <!--android:textColor="#000"-->
+            <!--android:text="****"-->
+            <!--/>-->
+    <!--</LinearLayout>-->
 
 
 </LinearLayout>

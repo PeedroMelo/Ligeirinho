@@ -61,6 +61,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:background="@android:color/holo_green_dark"
+        android:textColor="#fff"
         android:text="Criar uma conta" />
 
 </LinearLayout>

@@ -80,7 +80,7 @@ public class DriverMainActivity extends AppCompatActivity
         cMainView.setLayoutManager(new LinearLayoutManager(this));
 
         loadPedidos();
-
+        Log.d("m-database",mDatabase.getRef().toString());
     }
 
 
@@ -142,61 +142,58 @@ public class DriverMainActivity extends AppCompatActivity
         mDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists() && dataSnapshot.getChildrenCount() > 0) {
 
-                FirebaseRecyclerAdapter<Pedidos,DriverMainActivity.RequestViewHolder> firebaseRecyclerAdapter = null;
+                    FirebaseRecyclerAdapter<Pedidos, DriverMainActivity.RequestViewHolder> firebaseRecyclerAdapter = null;
 
-                for (DataSnapshot data : dataSnapshot.getChildren()){
+                    for (DataSnapshot data : dataSnapshot.getChildren()) {
 
-                    DatabaseReference lDatabase = mDatabase.child(data.getKey());
-
-
-                    firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Pedidos, DriverMainActivity.RequestViewHolder>
-                            (Pedidos.class, R.layout.request_row, DriverMainActivity.RequestViewHolder.class, lDatabase) {
-                        @Override
-                        public void populateViewHolder(DriverMainActivity.RequestViewHolder viewHolder, final Pedidos model, int position) {
-                            viewHolder.setPedido(model.getId_pedido());
-                            viewHolder.setSolicitanteID(model.getId_usuario());
-                            viewHolder.setDetalhes(model.getDetalhes());
-                            viewHolder.setStatus(model.getStatus());
-                            viewHolder.setTempoEntrega(model.getTempoEntrega());
-                            viewHolder.setDistancia(model.getDistancia());
-                            viewHolder.setValor(model.getValor());
-
-                            final String requestID     = model.getId_pedido();
-                            final String solicitanteID = model.getId_usuario();
-                            final String statusPedido = model.getStatus();
+                        DatabaseReference lDatabase = mDatabase.child(data.getKey());
 
 
+                        firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Pedidos, DriverMainActivity.RequestViewHolder>
+                                (Pedidos.class, R.layout.request_row, DriverMainActivity.RequestViewHolder.class, lDatabase) {
+                            @Override
+                            public void populateViewHolder(DriverMainActivity.RequestViewHolder viewHolder, final Pedidos model, int position) {
+                                viewHolder.setPedido(model.getId_pedido());
+                                viewHolder.setSolicitanteID(model.getId_usuario());
+                                viewHolder.setDetalhes(model.getDetalhes());
+                                viewHolder.setStatus(model.getStatus());
+                                viewHolder.setTempoEntrega(model.getTempoEntrega());
+                                viewHolder.setDistancia(model.getDistancia());
+                                viewHolder.setValor(model.getValor());
 
-                            Button btn = (Button) viewHolder.mView.findViewById(R.id.ver_mais);
-                            btn.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    Class activityRedir = DriverVisualizarPedido.class;
-                                    if(!statusPedido.equals("realizado")){
-                                        activityRedir = DriverFinalizarPedido.class;
+                                final String requestID = model.getId_pedido();
+                                final String solicitanteID = model.getId_usuario();
+                                final String statusPedido = model.getStatus();
+
+
+                                Button btn = (Button) viewHolder.mView.findViewById(R.id.ver_mais);
+                                btn.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        Class activityRedir = DriverVisualizarPedido.class;
+                                        if (!statusPedido.equals("realizado")) {
+                                            activityRedir = DriverFinalizarPedido.class;
+                                        }
+
+                                        Intent intent = new Intent(DriverMainActivity.this, activityRedir);
+                                        intent.putExtra("requestID", requestID);
+                                        intent.putExtra("solicitanteID", solicitanteID);
+                                        startActivity(intent);
+                                        finish();
+                                        return;
                                     }
+                                });
 
-                                    Intent intent = new Intent(DriverMainActivity.this, activityRedir);
-                                    intent.putExtra("requestID", requestID);
-                                    intent.putExtra("solicitanteID", solicitanteID);
-                                    startActivity(intent);
-                                    finish();
-                                    return;
-                                }
-                            });
+                            }
+                        };
+                    }
 
-                        }
-                    };
-
-
+                    cMainView.setAdapter(firebaseRecyclerAdapter);
+                    firebaseRecyclerAdapter.notifyDataSetChanged();
 
                 }
-
-                cMainView.setAdapter(firebaseRecyclerAdapter);
-                firebaseRecyclerAdapter.notifyDataSetChanged();
-
-
             }
 
             @Override

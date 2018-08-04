@@ -1,27 +1,44 @@
 package com.br.ligeirinho.clientes;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
+import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.br.ligeirinho.ChangeData;
 import com.br.ligeirinho.R;
+import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.util.HashMap;
 import java.util.Map;
 
 public class CustomerSettings extends AppCompatActivity {
 
     LinearLayout changeNome, changeSobrenome, changeTelefone, changeEmail, changeSenha;
     TextView fieldNome, fieldSobrenome, fieldTelefone, fieldEmail, fieldSenha;
+
+    ImageView imagemPerfil;
 
     private FirebaseAuth mAuth;
     private DatabaseReference mRequestDatabase;
@@ -32,7 +49,9 @@ public class CustomerSettings extends AppCompatActivity {
     private String telefone;
     private String email;
     private String senha;
+    private String imagem_perfil;
 
+    private Uri resultUri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,23 +68,18 @@ public class CustomerSettings extends AppCompatActivity {
         changeNome      = (LinearLayout) findViewById(R.id.changeNome);
         changeSobrenome = (LinearLayout) findViewById(R.id.changeSobrenome);
         changeTelefone  = (LinearLayout) findViewById(R.id.changeTelefone);
-        changeEmail     = (LinearLayout) findViewById(R.id.changeEmail);
-        changeSenha     = (LinearLayout) findViewById(R.id.changeSenha);
 
         fieldNome      = (TextView) findViewById(R.id.fieldNome);
         fieldSobrenome = (TextView) findViewById(R.id.fieldSobrenome);
         fieldTelefone  = (TextView) findViewById(R.id.fieldTelefone);
-        fieldEmail     = (TextView) findViewById(R.id.fieldEmail);
-        fieldSenha     = (TextView) findViewById(R.id.fieldSenha);
 
-
+        imagemPerfil = (ImageView) findViewById(R.id.imagemPerfil);
 
         mAuth            = FirebaseAuth.getInstance();
         userID           = mAuth.getCurrentUser().getUid();
         mRequestDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child("UserDetail").child(userID);
 
         getUserInfo();
-
 
         changeNome.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -115,44 +129,14 @@ public class CustomerSettings extends AppCompatActivity {
             }
         });
 
-        changeEmail.setOnClickListener(new View.OnClickListener() {
+        imagemPerfil.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(CustomerSettings.this, ChangeData.class);
-                intent.putExtra("userID",userID);
-                intent.putExtra("nome","");
-                intent.putExtra("sobrenome","");
-                intent.putExtra("telefone","");
-                intent.putExtra("email",fieldEmail.getText().toString());
-                intent.putExtra("senha","");
-                startActivity(intent);
-                finish();
-                return;
+                Intent intent = new Intent(Intent.ACTION_PICK);
+                intent.setType("image/*");
+                startActivityForResult(intent, 1);
             }
         });
-
-        changeSenha.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(CustomerSettings.this, ChangeData.class);
-                intent.putExtra("userID",userID);
-                intent.putExtra("email","");
-                intent.putExtra("nome","");
-                intent.putExtra("sobrenome","");
-                intent.putExtra("telefone","");
-                intent.putExtra("senha",fieldSenha.getText().toString());
-
-                startActivity(intent);
-                finish();
-                return;
-            }
-        });
-
-
-
-
-
-
     }
 
     private void getUserInfo(){
@@ -175,13 +159,9 @@ public class CustomerSettings extends AppCompatActivity {
                         telefone = map.get("telefone").toString();
                         fieldTelefone.setText(telefone);
                     }
-                    if(map.get("email") != null){
-                        email = map.get("email").toString();
-                        fieldEmail.setText(email);
-                    }
-                    if(map.get("senha") != null){
-                        senha = map.get("senha").toString();
-                        fieldSenha.setText(senha);
+                    if(map.get("imagem_perfil") != null){
+                        imagem_perfil = map.get("imagem_perfil").toString();
+                        Glide.with(getApplication()).load(imagem_perfil).into(imagemPerfil);
                     }
                 }
             }
@@ -191,6 +171,52 @@ public class CustomerSettings extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        super.onActivityResult(requestCode, resultCode, intent);
+        if(requestCode == 1 && resultCode == Activity.RESULT_OK){
+            final Uri imageUri = intent.getData();
+            resultUri = imageUri;
+            imagemPerfil.setImageURI(resultUri);
+
+            StorageReference filePath = FirebaseStorage.getInstance().getReference().child("profile_images").child(userID);
+            Bitmap bitmap = null;
+
+            try {
+                bitmap = MediaStore.Images.Media.getBitmap(getApplication().getContentResolver(), resultUri);
+            } catch (Exception e){
+                e.printStackTrace();
+            }
+
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 20, baos);
+            byte[] data = baos.toByteArray();
+            UploadTask uploadTask = filePath.putBytes(data);
+
+            uploadTask.addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    finish();
+                }
+            });
+            uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    Uri downloadUrl = taskSnapshot.getDownloadUrl();
+
+                    Map newImage = new HashMap();
+                    newImage.put("imagem_perfil", downloadUrl.toString());
+
+                    mRequestDatabase.updateChildren(newImage);
+                    finish();
+
+                }
+            });
+        }else{
+            finish();
+        }
     }
 
     @Override
