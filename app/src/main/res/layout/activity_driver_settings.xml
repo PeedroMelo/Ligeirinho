@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context="com.br.ligeirinho.clientes.CustomerSettings"
+    android:orientation="vertical">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+
+        >
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+
+                <ImageButton
+                    android:layout_width="110dp"
+                    android:layout_height="110dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/ic_account_circle_black_72dp"
+                    android:baselineAlignBottom="false" />
+
+            </TableRow>
+        </TableLayout>
+
+    </RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#c2c2c2"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginBottom="35dp"/>
+
+    <!-- Nome -->
+    <LinearLayout
+        android:id="@+id/changeNome"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="15dp"
+            android:textSize="15dp"
+            android:text="Nome"/>
+
+        <TextView
+            android:id="@+id/fieldNome"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="15dp"
+            android:layout_marginBottom="20dp"
+            android:textSize="20dp"
+            android:textColor="#000"
+            android:text="Pedro"
+            />
+
+    </LinearLayout>
+
+
+
+
+    <!-- Sobrenome -->
+    <LinearLayout
+        android:id="@+id/changeSobrenome"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="15dp"
+            android:textSize="15dp"
+            android:text="Sobrenome"/>
+
+        <TextView
+            android:id="@+id/fieldSobrenome"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="15dp"
+            android:layout_marginBottom="20dp"
+            android:textSize="20dp"
+            android:textColor="#000"
+            android:text="Melo"
+            />
+
+    </LinearLayout>
+
+
+
+    <!-- Telefone -->
+    <LinearLayout
+        android:id="@+id/changeTelefone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="15dp"
+            android:textSize="15dp"
+            android:text="Telefone"/>
+
+        <TextView
+            android:id="@+id/fieldTelefone"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="15dp"
+            android:layout_marginBottom="20dp"
+            android:textSize="20dp"
+            android:textColor="#000"
+            android:text="123456"
+            />
+
+    </LinearLayout>
+
+
+    <!-- Email -->
+    <LinearLayout
+        android:id="@+id/changeEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="15dp"
+            android:textSize="15dp"
+            android:text="Email"/>
+
+        <TextView
+            android:id="@+id/fieldEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="15dp"
+            android:layout_marginBottom="20dp"
+            android:textSize="20dp"
+            android:textColor="#000"
+            android:text="email"
+            />
+
+    </LinearLayout>
+
+
+    <!-- Senha -->
+    <LinearLayout
+        android:id="@+id/changeSenha"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="15dp"
+            android:textSize="15dp"
+            android:text="Senha"/>
+
+        <TextView
+            android:id="@+id/fieldSenha"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="15dp"
+            android:layout_marginBottom="20dp"
+            android:textSize="20dp"
+            android:textColor="#000"
+            android:text="****"
+            />
+    </LinearLayout>
+
+
+</LinearLayout>

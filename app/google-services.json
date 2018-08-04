@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "643497453945",
+    "firebase_url": "https://ligeirinho-9a2ec.firebaseio.com",
+    "project_id": "ligeirinho-9a2ec",
+    "storage_bucket": "ligeirinho-9a2ec.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:643497453945:android:e442f891310a08f1",
+        "android_client_info": {
+          "package_name": "com.br.ligeirinho"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "643497453945-9ob9hs07hpogcspha8ql3es2co9vqh2n.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.br.ligeirinho",
+            "certificate_hash": "0207fa5fb07eb84382082a8163fe392ff8440f3d"
+          }
+        },
+        {
+          "client_id": "643497453945-hd26luor5t1uh4m486c1k130ttgskv3o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCRgLc0o6MwR8GPkAfK7uXJX_-uVe_AcZ8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "643497453945-hd26luor5t1uh4m486c1k130ttgskv3o.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
