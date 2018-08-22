@@ -18,7 +18,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ChooseLogin">
+        <activity android:name=".Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -63,7 +63,8 @@
         <activity android:name=".ciclistas.DriverFinalizarPedido" />
         <activity android:name=".clientes.CustomersPedidosFinalizados" />
         <activity android:name=".ciclistas.DriverCriarConta" />
-        <activity android:name=".clientes.CustomerCriarConta"></activity>
+        <activity android:name=".clientes.CustomerCriarConta" />
+        <activity android:name=".ChooseLogin" />
     </application>
 
 </manifest>

@@ -55,10 +55,6 @@ public class DriverFinalizarPedido extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 getLatLong("origem");
-                Uri gmmIntentUri = Uri.parse("google.navigation:q="+latlng+"&mode=b");
-                Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
-                mapIntent.setPackage("com.google.android.apps.maps");
-                startActivity(mapIntent);
             }
         });
 
@@ -66,10 +62,6 @@ public class DriverFinalizarPedido extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 getLatLong("destino");
-                Uri gmmIntentUri = Uri.parse("google.navigation:q="+latlng+"&mode=b");
-                Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
-                mapIntent.setPackage("com.google.android.apps.maps");
-                startActivity(mapIntent);
             }
         });
 
@@ -181,8 +173,6 @@ public class DriverFinalizarPedido extends AppCompatActivity {
 
                     Log.d("endereco-certinho", requestInfoOrigem.get("endereco").toString());
 
-
-
                     customerRequest = FirebaseDatabase.getInstance().getReference("Pedidos").child("Finalizados").child(userID).child(requestID);
 
                     Map requestInfo = new HashMap();
@@ -266,6 +256,12 @@ public class DriverFinalizarPedido extends AppCompatActivity {
 
                     requestInfo = (HashMap) map.get(tipo);
                     latlng = requestInfo.get("latlng").toString().replace("lat/lng: (","").replace(")","");
+
+                    Uri gmmIntentUri = Uri.parse("google.navigation:q="+latlng+"&mode=b");
+
+                    Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+                    mapIntent.setPackage("com.google.android.apps.maps");
+                    startActivity(mapIntent);
 
                 }
             }

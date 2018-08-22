@@ -90,6 +90,7 @@ public class DriverSettings extends AppCompatActivity {
                 intent.putExtra("telefone","");
                 intent.putExtra("email","");
                 intent.putExtra("senha","");
+                intent.putExtra("tela","ciclista");
                 startActivity(intent);
                 finish();
                 return;
@@ -106,6 +107,7 @@ public class DriverSettings extends AppCompatActivity {
                 intent.putExtra("telefone","");
                 intent.putExtra("email","");
                 intent.putExtra("senha","");
+                intent.putExtra("tela","ciclista");
                 startActivity(intent);
                 finish();
                 return;
@@ -122,6 +124,7 @@ public class DriverSettings extends AppCompatActivity {
                 intent.putExtra("telefone",fieldTelefone.getText().toString());
                 intent.putExtra("email","");
                 intent.putExtra("senha","");
+                intent.putExtra("tela","ciclista");
                 startActivity(intent);
                 finish();
                 return;

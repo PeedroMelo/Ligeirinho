@@ -11,6 +11,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.br.ligeirinho.ciclistas.DriverSettings;
 import com.br.ligeirinho.clientes.CustomerSettings;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
@@ -26,9 +27,7 @@ public class ChangeData extends AppCompatActivity {
     EditText fieldData;
     Button salvar_alteracoes;
 
-
-    String userID, nome, sobrenome, telefone, email, senha;
-    String newValue, key;
+    String userID, nome, sobrenome, telefone, email, senha, telaAnterior, key;
 
     private FirebaseAuth cAuth;
     private DatabaseReference cCustomerDatabaseReference;
@@ -48,6 +47,8 @@ public class ChangeData extends AppCompatActivity {
         email     = args.getStringExtra("email");
         senha     = args.getStringExtra("senha");
 
+        telaAnterior = args.getStringExtra("tela");
+
         setTitle("Alterar Dados");
 
         fieldLabel        = (TextView) findViewById(R.id.fieldLabel);
@@ -58,9 +59,7 @@ public class ChangeData extends AppCompatActivity {
         voltar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ChangeData.this, CustomerSettings.class);
-                startActivity(intent);
-                finish();
+                voltarPagina(telaAnterior);
             }
         });
 
@@ -116,7 +115,7 @@ public class ChangeData extends AppCompatActivity {
 
                 cCustomerDatabaseReference.updateChildren(userInfo);
 
-                voltarPagina();
+                voltarPagina(telaAnterior);
             }
         });
     }
@@ -125,14 +124,22 @@ public class ChangeData extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
 
-        voltarPagina();
+        voltarPagina(telaAnterior);
 
     }
 
-    public void voltarPagina(){
-        Intent intent = new Intent(this, CustomerSettings.class);
-        startActivity(intent);
-        finishAffinity();
-        return;
+    public void voltarPagina(String voltarTela){
+
+        if(voltarTela.equals("ciclista")) {
+            Intent intent = new Intent(this, DriverSettings.class);
+            startActivity(intent);
+            finishAffinity();
+            return;
+        }else{
+            Intent intent = new Intent(this, CustomerSettings.class);
+            startActivity(intent);
+            finishAffinity();
+            return;
+        }
     }
 }

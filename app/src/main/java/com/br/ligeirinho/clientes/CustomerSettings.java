@@ -91,6 +91,7 @@ public class CustomerSettings extends AppCompatActivity {
                 intent.putExtra("telefone","");
                 intent.putExtra("email","");
                 intent.putExtra("senha","");
+                intent.putExtra("tela","cliente");
                 startActivity(intent);
                 finish();
                 return;
@@ -107,6 +108,7 @@ public class CustomerSettings extends AppCompatActivity {
                 intent.putExtra("telefone","");
                 intent.putExtra("email","");
                 intent.putExtra("senha","");
+                intent.putExtra("tela","cliente");
                 startActivity(intent);
                 finish();
                 return;
@@ -123,6 +125,7 @@ public class CustomerSettings extends AppCompatActivity {
                 intent.putExtra("telefone",fieldTelefone.getText().toString());
                 intent.putExtra("email","");
                 intent.putExtra("senha","");
+                intent.putExtra("tela","cliente");
                 startActivity(intent);
                 finish();
                 return;

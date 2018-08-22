@@ -28,17 +28,12 @@ public class ChooseLogin extends AppCompatActivity {
     private Button mDriver;
     private Button mCustomer;
 
-    private FirebaseAuth mAuth;
-    private FirebaseAuth.AuthStateListener firebaseAuthListener;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_login);
         getSupportActionBar().hide();
-
- //       redirectUser();
 
         Display display = getWindowManager().getDefaultDisplay();
         double width = display.getWidth();
@@ -81,51 +76,10 @@ public class ChooseLogin extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        //mAuth.addAuthStateListener(firebaseAuthListener);
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        //mAuth.removeAuthStateListener(firebaseAuthListener);
-    }
-
-    private void redirectUser(){
-
-        // Firebase Auth
-        mAuth = FirebaseAuth.getInstance(); // Recupera a instancia do Firebase e seta na cAuth
-
-        firebaseAuthListener = new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-
-                // Verifica o status do usuário
-                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser(); // Guarda a informação do usuário logado
-                //if(user.getUid() != null) Log.d("user-logado", user.getUid());
-
-                // Redireciona se estiver vazio
-                if ( user != null ){
-                    DatabaseReference current_user_db = FirebaseDatabase.getInstance().getReference().child("Users").child("Customers").child(user.getUid());
-
-                    if(current_user_db.getParent().getKey().equals("Customers")){
-                        Intent intent = new Intent(ChooseLogin.this, CustomerMainActivity.class);
-                        startActivity(intent);
-                        finish();
-                        return;
-                    }
-
-                    if(current_user_db.getParent().getKey().equals("Customers")){
-
-                        Intent intent = new Intent(ChooseLogin.this, DriverMainActivity.class);
-                        startActivity(intent);
-                        finish();
-                        return;
-
-                    }
-                }
-
-            }
-        };
-
     }
 }
